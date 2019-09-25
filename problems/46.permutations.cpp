@@ -35,3 +35,25 @@ public:
 		return res;
 	}
 };
+// 回溯算法实现
+class Solution {
+	void backTrack(vector<vector<int>>& list, vector<int>& nums, int index) {
+		if (index == nums.size()) {
+			list.push_back(nums);
+			return;
+		}
+		for (int i = index; i < nums.size(); i++)
+		{
+			swap(nums[index], nums[i]);
+			backTrack(list, nums, index + 1);
+			swap(nums[index], nums[i]);
+		}
+	}
+public:
+	vector<vector<int>> permute(vector<int>& nums) {
+		sort(nums.begin(), nums.end());
+		vector<vector<int>> res;
+		backTrack(res, nums, 0);
+		return res;
+	}
+};
